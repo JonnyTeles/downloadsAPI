@@ -5,9 +5,16 @@ import cors from 'cors'
 import { routes } from "./routes";
 import { AppError } from './error/AppError';
 import fs from 'fs';
+import https from 'https';
 
-const file = fs.readFileSync('./2E850AD610B17C224780AB1EFEBC89AA.txt')
+const key = fs.readFileSync('private.key')
+const cert = fs.readFileSync('certificate.crt')
 const app = express()
+
+const cred = {
+    key,
+    cert
+}
 
 app.use(cors())
 app.use(logger('dev'));
@@ -28,8 +35,7 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
     })
 })
 
-app.get('/.well-known/pki-validation/2E850AD610B17C224780AB1EFEBC89AA.txt', (req: Request, res: Response) => {
-    res.sendFile('/home/ubuntu/API/2E850AD610B17C224780AB1EFEBC89AA.txt')
-})
-
 app.listen(3000, () => console.log('API downloads rodando na porta 3000...🚀'));
+
+const httpsServer = https.createServer(cred, app)
+httpsServer.listen(8443)
