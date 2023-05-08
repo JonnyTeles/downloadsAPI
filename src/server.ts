@@ -32,4 +32,4 @@ app.get('/.well-known/pki-validation/2E850AD610B17C224780AB1EFEBC89AA.txt', (req
     res.sendFile('/home/ubuntu/API/2E850AD610B17C224780AB1EFEBC89AA.txt')
 })
 
-app.listen(4000, () => console.log('API downloads rodando na porta 4000...🚀'));
+app.listen(3000, () => console.log('API downloads rodando na porta 3000...🚀'));
