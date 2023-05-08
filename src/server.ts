@@ -7,8 +7,8 @@ import { AppError } from './error/AppError';
 import fs from 'fs';
 import https from 'https';
 
-const key = fs.readFileSync('private.key')
-const cert = fs.readFileSync('certificate.crt')
+const key = fs.readFileSync('./private.key')
+const cert = fs.readFileSync('./certificate.crt')
 const app = express()
 
 const cred = {
