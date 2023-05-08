@@ -38,4 +38,4 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 app.listen(3000, () => console.log('API downloads rodando na porta 3000...🚀'));
 
 const httpsServer = https.createServer(cred, app)
-httpsServer.listen(8443)
+httpsServer.listen(3000)
