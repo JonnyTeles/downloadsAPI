@@ -4,7 +4,6 @@ import { YoutubeService } from "../services/youtube.service";
 import { NextFunction } from "express-serve-static-core";
 import ytdl from "ytdl-core";
 const ytb = new YoutubeService()
-const bufferToStream = require('buffer-to-stream');
 
 export class YoutubeController {
     async response(req: Request, res: Response) {
@@ -13,7 +12,7 @@ export class YoutubeController {
         try {
             const response = await ytb.youtubeResponse(String(url))
             return res.status(200).send({ response })
-        } catch (err) {
+        } catch (err: any) {
             console.log(err);
             throw new AppError(`Erro: ${err}`, err.statusCode)
         }
@@ -32,7 +31,7 @@ export class YoutubeController {
             });
             res.set('Content-Type', 'video/mp4');
             videoStream.pipe(res);
-        } catch (err) {
+        } catch (err: any) {
             console.log(err);
             next(err);
         }
@@ -42,7 +41,7 @@ export class YoutubeController {
         try {
             const { url } = req.query;
             if (!url) throw new AppError('URL vázia')
-            
+
             const info = await ytdl.getInfo(String(url));
             const format = ytdl.chooseFormat(info.formats, { quality: 'highest', filter: 'audioonly' });
             const videoStream = ytdl(String(url), { format });
@@ -51,7 +50,7 @@ export class YoutubeController {
             });
             res.set('Content-Type', 'music/mp3');
             videoStream.pipe(res);
-        } catch (err) {
+        } catch (err: any) {
             console.log(err);
             next(err);
         }
