@@ -29,7 +29,7 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 })
 
 app.get('/.well-known/pki-validation/2E850AD610B17C224780AB1EFEBC89AA.txt', (req: Request, res: Response) => {
-    res.sendFile('home/ubuntu/API/2E850AD610B17C224780AB1EFEBC89AA.txt')
+    res.sendFile('/home/ubuntu/API/2E850AD610B17C224780AB1EFEBC89AA.txt')
 })
 
 app.listen(4000, () => console.log('API downloads rodando na porta 4000...🚀'));
